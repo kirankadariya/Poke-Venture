@@ -1,7 +1,9 @@
 
 const main = document.querySelector("main");
 
-const url = "https://pokeapi.co/api/v2/pokemon/pikachu";
+//const url1 = "https://pokeapi.co/api/v2/pokemon/pikachu";
+
+const url = "https://pokeapi.co/api/v2/pokemon-species";
 
 async function getPokemon(){
     try {const response =await fetch(url)
@@ -11,7 +13,7 @@ async function getPokemon(){
         }
 
         const data =await response.json();
-        renderData(data)
+        renderSpecies(data)
     } catch(err){
         console.log("There is problem with fetch: " +err)
     }
@@ -27,4 +29,11 @@ function renderData(data){
         main.insertAdjacentHTML("beforeend", html); 
 }
 
-
+function renderSpecies(data) {
+    const listItems = data.results.map(item => `<li>${item.name}</li>`).join("");
+    const html = `
+      <h2>Pokemon Species</h2>
+      <ul>${listItems}</ul>
+    `;
+    main.insertAdjacentHTML("beforeend", html);
+  }
